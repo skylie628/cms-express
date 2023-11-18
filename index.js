@@ -1,12 +1,16 @@
 const express = require('express')
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
 const app = express()
-const port = 3000;
+
+dotenv.config();
+
+const port = process.env.PORT || 3000;
 
 // connect to db
 mongoose
   .connect(
-    'mongodb+srv://truong:Truong123456@cluster0.ak1kznv.mongodb.net/?retryWrites=true&w=majority', 
+    process.env.DB_CONNECT,
     {
       useNewUrlParser: true,
     }
@@ -24,8 +28,8 @@ app.use(express.urlencoded({
 //route
 const userRoute = require('./src/route/user.route');
 
-app.get('/', (req, res) => {
-  res.send('Hello World! 1321321312123') // view
+app.get('/', (_, res) => {
+  res.send('API running') // view
 })
 
 // route
