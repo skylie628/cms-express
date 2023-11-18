@@ -1,7 +1,7 @@
 const userService = require("../service/user.service");
 
 module.exports = {
-  signup:  async (req, res) => {
+  signup: async (req, res) => {
     const firstName = req.body.data.firstName;
     const lastName = req.body.data.lastName;
     const email = req.body.data.email;
@@ -10,28 +10,34 @@ module.exports = {
       firstName,
       lastName,
       email,
-      password
-    }
+      password,
+    };
 
     try {
-      const user = await userService.create(payload)
+      const user = await userService.create(payload);
       res.status(200).json({
-        msg: 'Create user success',
+        msg: "Create user success",
         isSucess: true,
-        data: user
+        data: user,
       });
-    } catch (err){
-
+    } catch (err) {
       res.status(400).json({
-        msg: 'Create user error',
+        msg: "Create user error",
         isSucess: false,
         data: null,
-        error: err
+        error: err,
       });
     }
   },
+
   getAllUsers: async (req, res) => {
     const data = await userService.findAll();
     console.log(data);
-  }
-}
+  },
+  signin: async (req, res) => {},
+  logout: async (req, res) => {},
+  resetPassword: async (req, res) => {},
+  getUser: async (req, res) => {},
+  updateUser: async (req, res) => {},
+  deleteUser: async (req, res) => {},
+};
